@@ -1,0 +1,35 @@
+"# SYNTHETIC scenario": fictional patient data only — never real PHI
+id: s06_fever_and_med_issue
+title: Fever plus medication problem
+discharge_doc: discharge_docs/d01_cellulitis.md
+patient:
+  externalRef: SYN-0001
+  firstName: Jordan
+  lastName: Ellis
+  dob: 1968-04-12
+  phone: "+15550001001"
+patient_turns:
+  - yes correct
+  - fever of 101.5 this morning
+  - no chest pain
+  - I stopped the antibiotic, it made me sick
+  - alright, thank you
+expected:
+  extractions:
+    identity_verified: true
+    fever_f: 101.5
+    chest_pain: false
+    medication_adherent: false
+    medication_issues:
+      - I stopped the antibiotic, it made me sick
+    followup_confirmed: true
+  escalations:
+    - fever_high
+  required_steps_completed:
+    - greeting
+    - identity_verification
+    - symptom_check
+    - medication_review
+    - wrap_up
+  outcome: escalated
+notes: mirrors the PLAN ground-truth example

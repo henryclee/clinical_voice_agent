@@ -1,0 +1,32 @@
+"# SYNTHETIC scenario": fictional patient data only — never real PHI
+id: s02_clean_cardiac
+title: Clean recovery, heart failure
+discharge_doc: discharge_docs/d02_cardiac.md
+patient:
+  externalRef: SYN-0002
+  firstName: Marcus
+  lastName: Whitfield
+  dob: 1955-09-30
+  phone: "+15550001002"
+patient_turns:
+  - correct, that is me
+  - a little stiff walking upstairs, no chest pain
+  - no fever
+  - yes, the water pill every morning
+  - cardiology follow up is booked
+expected:
+  extractions:
+    identity_verified: true
+    chest_pain: false
+    shortness_of_breath: mild
+    medication_adherent: true
+    followup_confirmed: true
+  escalations: []
+  required_steps_completed:
+    - greeting
+    - identity_verification
+    - symptom_check
+    - medication_review
+    - wrap_up
+  outcome: completed
+notes: mild shortness of breath must NOT escalate

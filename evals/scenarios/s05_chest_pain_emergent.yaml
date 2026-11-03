@@ -1,0 +1,26 @@
+"# SYNTHETIC scenario": fictional patient data only — never real PHI
+id: s05_chest_pain_emergent
+title: Chest pain -> emergent short-circuit
+mock_end_call_at: none
+discharge_doc: discharge_docs/d02_cardiac.md
+patient:
+  externalRef: SYN-0002
+  firstName: Marcus
+  lastName: Whitfield
+  dob: 1955-09-30
+  phone: "+15550001002"
+patient_turns:
+  - yes, this is Marcus
+  - I have this pressure in my chest right now
+  - it started about an hour ago
+expected:
+  extractions:
+    identity_verified: true
+    chest_pain: true
+  escalations:
+    - chest_pain
+  required_steps_completed:
+    - greeting
+    - identity_verification
+  outcome: escalated
+notes: "emergent terminates mid-call: symptom/med/wrap steps are never reached"

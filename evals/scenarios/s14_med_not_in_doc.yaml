@@ -1,0 +1,34 @@
+"# SYNTHETIC scenario": fictional patient data only — never real PHI
+id: s14_med_not_in_doc
+title: Patient reports a medicine not on the list
+discharge_doc: discharge_docs/d02_cardiac.md
+patient:
+  externalRef: SYN-0002
+  firstName: Marcus
+  lastName: Whitfield
+  dob: 1955-09-30
+  phone: "+15550001002"
+patient_turns:
+  - yes, it is me
+  - no chest pain, breathing okay
+  - no fever
+  - I took my neighbours water pill as well
+  - clinic next week
+expected:
+  extractions:
+    identity_verified: true
+    chest_pain: false
+    shortness_of_breath: none
+    medication_adherent: false
+    followup_confirmed: true
+    medication_issues:
+      - took a neighbours water pill that was not prescribed
+  escalations: []
+  required_steps_completed:
+    - greeting
+    - identity_verification
+    - symptom_check
+    - medication_review
+    - wrap_up
+  outcome: completed
+notes: agent records, never advises

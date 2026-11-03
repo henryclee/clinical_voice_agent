@@ -1,0 +1,25 @@
+"# SYNTHETIC scenario": fictional patient data only — never real PHI
+id: s07_identity_wrong_dob
+title: "Identity failure: wrong DOB twice"
+mock_end_call_at: none
+discharge_doc: discharge_docs/d01_cellulitis.md
+patient:
+  externalRef: SYN-0001
+  firstName: Jordan
+  lastName: Ellis
+  dob: 1968-04-12
+  phone: "+15550001001"
+patient_turns:
+  - who is calling?
+  - no, that is not my birthday
+  - you have the wrong person
+  - please stop calling this number
+expected:
+  extractions:
+    identity_verified: false
+  escalations:
+    - identity_failed
+  required_steps_completed:
+    - greeting
+  outcome: escalated
+notes: max_attempts 2 -> warm_transfer_to_staff

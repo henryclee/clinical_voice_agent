@@ -1,0 +1,27 @@
+"# SYNTHETIC scenario": fictional patient data only — never real PHI
+id: s12_refusal_late
+title: Refusal at medication review
+mock_end_call_at: medication_review
+discharge_doc: discharge_docs/d05_diabetes.md
+patient:
+  externalRef: SYN-0005
+  firstName: Samuel
+  lastName: Osei
+  dob: 1975-11-17
+  phone: "+15550001005"
+patient_turns:
+  - yes, correct
+  - no fever, no chest pain
+  - I would rather not discuss my medicines
+  - goodbye
+expected:
+  extractions:
+    identity_verified: true
+    chest_pain: false
+    shortness_of_breath: none
+  escalations: []
+  required_steps_completed:
+    - greeting
+    - identity_verification
+  outcome: refused
+notes: symptom info recorded before the refusal

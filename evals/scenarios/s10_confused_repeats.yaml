@@ -1,0 +1,34 @@
+"# SYNTHETIC scenario": fictional patient data only — never real PHI
+id: s10_confused_repeats
+title: Confused patient repeats himself
+discharge_doc: discharge_docs/d04_postop.md
+patient:
+  externalRef: SYN-0004
+  firstName: Elena
+  lastName: Novak
+  dob: 1982-06-05
+  phone: "+15550001004"
+patient_turns:
+  - yes it is me, hello?
+  - the tummy hurts, I said it hurts
+  - a seven out of ten
+  - I think I took the pills, maybe twice
+  - ok thank you
+expected:
+  extractions:
+    identity_verified: true
+    chest_pain: false
+    shortness_of_breath: none
+    medication_adherent: true
+    followup_confirmed: true
+    pain_score: 7
+    wound_concern: false
+  escalations: []
+  required_steps_completed:
+    - greeting
+    - identity_verification
+    - symptom_check
+    - medication_review
+    - wrap_up
+  outcome: completed
+notes: last stated severity wins

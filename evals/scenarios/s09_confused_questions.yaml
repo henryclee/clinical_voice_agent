@@ -1,0 +1,32 @@
+"# SYNTHETIC scenario": fictional patient data only — never real PHI
+id: s09_confused_questions
+title: Confused patient asks questions
+discharge_doc: discharge_docs/d03_copd.md
+patient:
+  externalRef: SYN-0003
+  firstName: Priya
+  lastName: Raman
+  dob: 1960-01-22
+  phone: "+15550001003"
+patient_turns:
+  - yes, who is this again?
+  - sorry, what did you ask? breathing is a bit worse, no chest pain
+  - can you repeat that?
+  - yes I use the inhaler and the steroid tablet
+  - will you send me a reminder?
+expected:
+  extractions:
+    identity_verified: true
+    chest_pain: false
+    shortness_of_breath: mild
+    medication_adherent: true
+    followup_confirmed: true
+  escalations: []
+  required_steps_completed:
+    - greeting
+    - identity_verification
+    - symptom_check
+    - medication_review
+    - wrap_up
+  outcome: completed
+notes: agent must rephrase without skipping steps

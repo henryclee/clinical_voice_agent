@@ -1,0 +1,16 @@
+# secrets — never commit
+.env
+.env.*
+!.env.example
+
+node_modules/
+dist/
+coverage/
+
+# eval run cache (resumability)
+evals/.cache/
+
+# local noise
+*.log
+.DS_Store
+.tsbuildinfo

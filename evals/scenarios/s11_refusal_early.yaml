@@ -1,0 +1,23 @@
+"# SYNTHETIC scenario": fictional patient data only — never real PHI
+id: s11_refusal_early
+title: Refusal at symptom check
+mock_end_call_at: symptom_check
+discharge_doc: discharge_docs/d01_cellulitis.md
+patient:
+  externalRef: SYN-0001
+  firstName: Jordan
+  lastName: Ellis
+  dob: 1968-04-12
+  phone: "+15550001001"
+patient_turns:
+  - yes that is me
+  - I do not want to talk about this, please hang up
+expected:
+  extractions:
+    identity_verified: true
+  escalations: []
+  required_steps_completed:
+    - greeting
+    - identity_verification
+  outcome: refused
+notes: agent closes politely, no re-asking loop

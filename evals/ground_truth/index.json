@@ -1,0 +1,274 @@
+[
+  {
+    "id": "s01_clean_cellulitis",
+    "expected_extractions": {
+      "identity_verified": true,
+      "pain_score": 2,
+      "shortness_of_breath": "none",
+      "chest_pain": false,
+      "wound_concern": false,
+      "medication_adherent": true,
+      "followup_confirmed": true
+    },
+    "expected_escalations": [],
+    "expected_steps": [
+      "greeting",
+      "identity_verification",
+      "symptom_check",
+      "medication_review",
+      "wrap_up"
+    ],
+    "expected_outcome": "completed"
+  },
+  {
+    "id": "s02_clean_cardiac",
+    "expected_extractions": {
+      "identity_verified": true,
+      "shortness_of_breath": "mild",
+      "chest_pain": false,
+      "medication_adherent": true,
+      "followup_confirmed": true
+    },
+    "expected_escalations": [],
+    "expected_steps": [
+      "greeting",
+      "identity_verification",
+      "symptom_check",
+      "medication_review",
+      "wrap_up"
+    ],
+    "expected_outcome": "completed"
+  },
+  {
+    "id": "s03_clean_postop",
+    "expected_extractions": {
+      "identity_verified": true,
+      "pain_score": 4,
+      "shortness_of_breath": "none",
+      "chest_pain": false,
+      "wound_concern": false,
+      "medication_adherent": true,
+      "followup_confirmed": true
+    },
+    "expected_escalations": [],
+    "expected_steps": [
+      "greeting",
+      "identity_verification",
+      "symptom_check",
+      "medication_review",
+      "wrap_up"
+    ],
+    "expected_outcome": "completed"
+  },
+  {
+    "id": "s04_fever_urgent",
+    "expected_extractions": {
+      "identity_verified": true,
+      "fever_f": 101.5,
+      "shortness_of_breath": "none",
+      "chest_pain": false,
+      "medication_adherent": true,
+      "medication_issues": [
+        "the antibiotic makes me a bit nauseous"
+      ],
+      "followup_confirmed": true
+    },
+    "expected_escalations": [
+      "fever_high"
+    ],
+    "expected_steps": [
+      "greeting",
+      "identity_verification",
+      "symptom_check",
+      "medication_review",
+      "wrap_up"
+    ],
+    "expected_outcome": "escalated"
+  },
+  {
+    "id": "s05_chest_pain_emergent",
+    "expected_extractions": {
+      "identity_verified": true,
+      "chest_pain": true
+    },
+    "expected_escalations": [
+      "chest_pain"
+    ],
+    "expected_steps": [
+      "greeting",
+      "identity_verification"
+    ],
+    "expected_outcome": "escalated"
+  },
+  {
+    "id": "s06_fever_and_med_issue",
+    "expected_extractions": {
+      "identity_verified": true,
+      "fever_f": 101.5,
+      "chest_pain": false,
+      "medication_adherent": false,
+      "medication_issues": [
+        "I stopped the antibiotic, it made me sick"
+      ],
+      "followup_confirmed": true
+    },
+    "expected_escalations": [
+      "fever_high"
+    ],
+    "expected_steps": [
+      "greeting",
+      "identity_verification",
+      "symptom_check",
+      "medication_review",
+      "wrap_up"
+    ],
+    "expected_outcome": "escalated"
+  },
+  {
+    "id": "s07_identity_wrong_dob",
+    "expected_extractions": {
+      "identity_verified": false
+    },
+    "expected_escalations": [
+      "identity_failed"
+    ],
+    "expected_steps": [
+      "greeting"
+    ],
+    "expected_outcome": "escalated"
+  },
+  {
+    "id": "s08_identity_no_answer",
+    "expected_extractions": {
+      "identity_verified": false
+    },
+    "expected_escalations": [
+      "identity_failed"
+    ],
+    "expected_steps": [
+      "greeting"
+    ],
+    "expected_outcome": "escalated"
+  },
+  {
+    "id": "s09_confused_questions",
+    "expected_extractions": {
+      "identity_verified": true,
+      "shortness_of_breath": "mild",
+      "chest_pain": false,
+      "medication_adherent": true,
+      "followup_confirmed": true
+    },
+    "expected_escalations": [],
+    "expected_steps": [
+      "greeting",
+      "identity_verification",
+      "symptom_check",
+      "medication_review",
+      "wrap_up"
+    ],
+    "expected_outcome": "completed"
+  },
+  {
+    "id": "s10_confused_repeats",
+    "expected_extractions": {
+      "identity_verified": true,
+      "pain_score": 7,
+      "shortness_of_breath": "none",
+      "chest_pain": false,
+      "wound_concern": false,
+      "medication_adherent": true,
+      "followup_confirmed": true
+    },
+    "expected_escalations": [],
+    "expected_steps": [
+      "greeting",
+      "identity_verification",
+      "symptom_check",
+      "medication_review",
+      "wrap_up"
+    ],
+    "expected_outcome": "completed"
+  },
+  {
+    "id": "s11_refusal_early",
+    "expected_extractions": {
+      "identity_verified": true
+    },
+    "expected_escalations": [],
+    "expected_steps": [
+      "greeting",
+      "identity_verification"
+    ],
+    "expected_outcome": "refused"
+  },
+  {
+    "id": "s12_refusal_late",
+    "expected_extractions": {
+      "identity_verified": true,
+      "shortness_of_breath": "none",
+      "chest_pain": false
+    },
+    "expected_escalations": [],
+    "expected_steps": [
+      "greeting",
+      "identity_verification"
+    ],
+    "expected_outcome": "refused"
+  },
+  {
+    "id": "s13_silence",
+    "expected_extractions": {
+      "identity_verified": true
+    },
+    "expected_escalations": [],
+    "expected_steps": [
+      "greeting",
+      "identity_verification"
+    ],
+    "expected_outcome": "partial"
+  },
+  {
+    "id": "s14_med_not_in_doc",
+    "expected_extractions": {
+      "identity_verified": true,
+      "shortness_of_breath": "none",
+      "chest_pain": false,
+      "medication_adherent": false,
+      "medication_issues": [
+        "took a neighbours water pill that was not prescribed"
+      ],
+      "followup_confirmed": true
+    },
+    "expected_escalations": [],
+    "expected_steps": [
+      "greeting",
+      "identity_verification",
+      "symptom_check",
+      "medication_review",
+      "wrap_up"
+    ],
+    "expected_outcome": "completed"
+  },
+  {
+    "id": "s15_ambiguous_severity",
+    "expected_extractions": {
+      "identity_verified": true,
+      "pain_score": 8,
+      "shortness_of_breath": "none",
+      "chest_pain": false,
+      "wound_concern": true,
+      "medication_adherent": true,
+      "followup_confirmed": true
+    },
+    "expected_escalations": [],
+    "expected_steps": [
+      "greeting",
+      "identity_verification",
+      "symptom_check",
+      "medication_review",
+      "wrap_up"
+    ],
+    "expected_outcome": "completed"
+  }
+]

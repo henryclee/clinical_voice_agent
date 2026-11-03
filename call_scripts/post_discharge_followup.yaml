@@ -1,0 +1,24 @@
+# SYNTHETIC DATA ONLY — the persona, patients and clinical content referenced by this
+# script are fictional. No real PHI is used anywhere in this project.
+#
+# A call script is configuration, not code: steps are ordered, the state machine walks
+# them, and escalation rules are evaluated by the deterministic escalation engine after
+# every turn (the model proposes; rules decide).
+id: post_discharge_followup
+version: 1
+persona: |
+  You are a warm, concise clinical follow-up assistant calling on behalf of
+  {{practice_name}}. You are NOT a clinician and must never give medical advice,
+  diagnoses, or dosing instructions. Keep turns under 2 sentences.
+steps:
+  - { id: greeting, instruction: "Introduce yourself and state the purpose of the call.", required: true }
+  - { id: identity_verification, instruction: "Confirm you are speaking with the patient using DOB.",
+      required: true, max_attempts: 2, on_failure: warm_transfer_to_staff }
+  - { id: symptom_check, instruction: "Ask about pain, fever, wound condition, and shortness of breath.", required: true }
+  - { id: medication_review, instruction: "Confirm the patient is taking prescribed medications.", required: true }
+  - { id: wrap_up, instruction: "Summarize next steps and confirm the follow-up appointment.", required: true }
+escalation_rules:
+  - { id: fever_high, when: { field: fever_f, op: gte, value: 100.4 }, urgency: urgent, reason: "Fever >= 100.4F reported post-discharge" }
+  - { id: chest_pain, when: { field: chest_pain, op: eq, value: true }, urgency: emergent, reason: "Chest pain reported" }
+  - { id: severe_sob, when: { field: shortness_of_breath, op: eq, value: severe }, urgency: emergent, reason: "Severe shortness of breath reported" }
+  - { id: identity_failed, when: { field: identity_verified, op: eq, value: false }, urgency: routine, reason: "Identity could not be verified; warm transfer to staff" }

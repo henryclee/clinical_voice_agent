@@ -1,0 +1,36 @@
+"# SYNTHETIC scenario": fictional patient data only — never real PHI
+id: s04_fever_urgent
+title: Fever 101.5F -> urgent
+discharge_doc: discharge_docs/d01_cellulitis.md
+patient:
+  externalRef: SYN-0001
+  firstName: Jordan
+  lastName: Ellis
+  dob: 1968-04-12
+  phone: "+15550001001"
+patient_turns:
+  - yes it is me
+  - my temperature was 101.5 last night
+  - no chest pain and breathing is fine
+  - the antibiotic makes me a bit nauseous
+  - ok, I will watch it closely
+expected:
+  extractions:
+    identity_verified: true
+    fever_f: 101.5
+    chest_pain: false
+    shortness_of_breath: none
+    medication_adherent: true
+    medication_issues:
+      - the antibiotic makes me a bit nauseous
+    followup_confirmed: true
+  escalations:
+    - fever_high
+  required_steps_completed:
+    - greeting
+    - identity_verification
+    - symptom_check
+    - medication_review
+    - wrap_up
+  outcome: escalated
+notes: "urgent: advise, finish the script, close escalated"

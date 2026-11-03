@@ -1,0 +1,24 @@
+"# SYNTHETIC scenario": fictional patient data only — never real PHI
+id: s08_identity_no_answer
+title: "Identity failure: refuses to confirm"
+mock_end_call_at: none
+discharge_doc: discharge_docs/d05_diabetes.md
+patient:
+  externalRef: SYN-0005
+  firstName: Samuel
+  lastName: Osei
+  dob: 1975-11-17
+  phone: "+15550001005"
+patient_turns:
+  - why do you need my birthday?
+  - I am not telling you anything
+  - no
+expected:
+  extractions:
+    identity_verified: false
+  escalations:
+    - identity_failed
+  required_steps_completed:
+    - greeting
+  outcome: escalated
+notes: identity failure never produces partial
